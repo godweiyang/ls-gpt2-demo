@@ -43,7 +43,7 @@ def main():
     if args.i is not None:
         sentences = [args.i]
     else:
-        sentences = ["我要找个男朋友，", "我今天很开心，", "我要睡觉了，", "我不会再说话了，", "我要学英语了，", "我单身很久了，"]
+        sentences = ["我要找个男朋友，", "我今天很开心，"]
 
     ls_inputs = ls_tokenizer(sentences, return_tensors="pt", padding=True)["input_ids"]
     ls_generate(ls_model, ls_tokenizer, ls_inputs)

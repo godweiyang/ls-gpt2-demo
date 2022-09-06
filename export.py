@@ -97,7 +97,7 @@ def extract_gpt_weights(
     hdf5_file.create_dataset("model_conf/src_padding_id", data=pad_id, dtype="i4")
     hdf5_file.create_dataset(
         "model_conf/sampling_method",
-        data=np.array([ord(c) for c in "topk"]).astype(np.int8),
+        data=np.array([ord(c) for c in "topp"]).astype(np.int8),
         dtype="i1",
     )
     hdf5_file.create_dataset("model_conf/topp", data=topp, dtype="f4")
