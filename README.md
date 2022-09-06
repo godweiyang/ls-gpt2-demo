@@ -3,7 +3,7 @@
 ```shell
 python3 -m torch.distributed.launch \
     --nproc_per_node=8 \
-    train/train.py \
+    train.py \
     --model_name_or_path uer/gpt2-chinese-cluecorpussmall \
     --train_file data/train.txt \
     --per_device_train_batch_size 16 \
@@ -20,7 +20,7 @@ python3 -m torch.distributed.launch \
 ```shell
 python3 -m torch.distributed.launch \
     --nproc_per_node=8 \
-    train/train.py \
+    train.py \
     --model_name_or_path uer/gpt2-chinese-cluecorpussmall \
     --train_file data/train.txt \
     --per_device_train_batch_size 16 \
@@ -36,17 +36,17 @@ python3 -m torch.distributed.launch \
 ```
 
 ```shell
-python3 export/export.py -m /tmp/test-97/pytorch_model.bin
+python3 export.py -m /tmp/test-97/pytorch_model.bin
 ```
 
 ```shell
-python3 export/export_int8.py -m /tmp/quant/test-97/pytorch_model.bin
+python3 export.py -m /tmp/quant/test-97/pytorch_model.bin -q
 ```
 
 ```shell
-python3 generate/generate.py -m /tmp/test-97/pytorch_model.hdf5
+python3 generate.py -m /tmp/test-97/pytorch_model.hdf5
 ```
 
 ```shell
-python3 generate/generate.py -m /tmp/quant/test-97/pytorch_model.hdf5 -q
+python3 generate.py -m /tmp/quant/test-97/pytorch_model.hdf5 -q
 ```

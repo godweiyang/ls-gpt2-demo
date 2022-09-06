@@ -27,12 +27,12 @@ def ls_generate(model, tokenizer, inputs):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-m", type=str)
+    parser.add_argument("-i", type=str, default=None)
+    parser.add_argument("-p", type=str, default="uer/gpt2-chinese-cluecorpussmall")
     parser.add_argument("-q", action="store_true")
     args = parser.parse_args()
 
-    ls_tokenizer = BertTokenizer.from_pretrained(
-        "uer/gpt2-chinese-cluecorpussmall"
-    )
+    ls_tokenizer = BertTokenizer.from_pretrained(args.p)
     ls_tokenizer.add_special_tokens({"pad_token": "[PAD]"})
 
     if args.q:
@@ -40,7 +40,10 @@ def main():
     else:
         ls_model = lsi.Gpt(args.m, max_batch_size=16)
 
-    sentences = ["我要找个男朋友，", "我今天很开心，", "我要睡觉了，", "我不会再说话了，", "我要学英语了，", "我单身很久了，"]
+    if args.i is not None:
+        sentences = [args.i]
+    else:
+        sentences = ["我要找个男朋友，", "我今天很开心，", "我要睡觉了，", "我不会再说话了，", "我要学英语了，", "我单身很久了，"]
 
     ls_inputs = ls_tokenizer(sentences, return_tensors="pt", padding=True)["input_ids"]
     ls_generate(ls_model, ls_tokenizer, ls_inputs)
